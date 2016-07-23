@@ -3,26 +3,26 @@ app = Flask(__name__)
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Rank
+from database_setup import Base, User
 
-engine = create_engine('sqlite:///rank.db')
+engine = create_engine('sqlite:///user.db')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 @app.route('/')
-@app.route('/score/')
+@app.route('/scores/')
 def showAll():
-    ranks = session.query(Rank).all()
+    users = session.query(User).all()
     output = "<h1>Score lists</h1>"
     output += "</br>"
-    for i in ranks:
-        output += "%d" % i.id
+    for user in users:
+        output += "%d" % user.id
         output += "</br>"
-        output += "name : %s" % i.name
+        output += "name : %s" % user.name
         output += "</br>"
-        output += "score : %d" % i.score
+        output += "score : %d" % user.score
         output += "</br></br>"
     return output
 

@@ -7,14 +7,14 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
-class Rank(Base):
+class User(Base):
 
-    __tablename__ = 'rank'
+    __tablename__ = 'user'
 
     id = Column(Integer, primary_key = True)
     email = Column(String(80), nullable = False)
     name = Column(String(80), nullable = False)
     score = Column(Integer)
 
-engine = create_engine('sqlite:///rank.db')
+engine = create_engine('sqlite:///user.db')
 Base.metadata.create_all(engine)
