@@ -18,14 +18,24 @@ def showAll():
     output = "<h1>Score lists</h1>"
     output += "</br>"
     for user in users:
-        output += "%d" % user.id
+        output += "%s" % user.id
         output += "</br>"
         output += "name : %s" % user.name
         output += "</br>"
-        output += "score : %d" % user.score
+        output += "score : %s" % user.score
         output += "</br></br>"
     return output
 
+@app.route('/scores/new/', methods=['GET','POST'])
+def newUser():
+    if request.method == 'POST':
+        user = User(name=request.form['name'], email=request.form['email'], score=int(request.form['score']))
+        session.add(user)
+        session.commit()
+        return redirect(url_for('showAll'))
+    else:
+        return render_template('newUser.html')
+    return "page to add user"
 if __name__ == '__main__':
     app.debug = True
     app.run(host = '0.0.0.0', port = 5000)
