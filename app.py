@@ -35,7 +35,23 @@ def newUser():
         return redirect(url_for('showAll'))
     else:
         return render_template('newUser.html')
-    return "page to add user"
+
+@app.route('/scores/<int:user_id>/edit/', methods=['GET','POST'])
+def editUser(user_id):
+    user = session.query(User).filter_by(id = user_id).one()
+    if request.method == 'POST':
+        if request.form['name']:
+            user.name = request.form['name']
+        if request.form['email']:
+            user.email = request.form['email']
+        if request.form['score']:
+            user.score = request.form['score']
+        session.add(user)
+        session.commit()
+        return redirect(url_for('showAll'))
+    else:
+        return render_template('editUser.html',user = user)
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host = '0.0.0.0', port = 5000)

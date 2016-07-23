@@ -1,0 +1,14 @@
+<html><body>
+<h1>Edit User</h1>
+
+<form action="{{url_for('editUser', user_id=user.id)}}" method = 'POST'>
+  <p>Name:</p>
+  <input type='text' size='30' name='name' placehplder = '{{user.name}}'>
+  <p>Email:</p>
+  <input type='text' size='30' name='email' placehplder = '{{user.email}}'>
+  <p>Score:</p>
+  <input type='number' size='30' name='score' placehplder = '{{user.score}}'>
+  <input type='submit' value='Edit'>
+  <a href = '{{url_for('showAll')}}'>Cancel</a>
+</form>
+</body></html>
