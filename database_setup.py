@@ -16,5 +16,16 @@ class User(Base):
     name = Column(String(80), nullable = False)
     score = Column(Integer)
 
+
+    @property
+    def serialize(user):
+        # Returns object data in easily serializeable format
+        return {
+                'id'    : user.id,
+                'name'  : user.name,
+                'email' : user.email,
+                'score' : user.score,
+            }
+
 engine = create_engine('sqlite:///user.db')
 Base.metadata.create_all(engine)

@@ -52,6 +52,11 @@ def editUser(user_id):
     else:
         return render_template('editUser.html',user = user)
 
+@app.route('/scores/JSON')
+def restaurantMenuJSON():
+    users = session.query(User).all()
+    return jsonify(User=[user.serialize for user in users])
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host = '0.0.0.0', port = 5000)
