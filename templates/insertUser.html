@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <h1>Insert User</h1>
+    <form action="{{url_for('insertUser')}}" method = 'POST'>
+        <p>Name:</p>
+        <input type='text' size='30' name='name'>
+        <p>Email:</p>
+        <input type='text' size='30' name='email'>
+        <p>Score:</p>
+        <input type='number' size='30' name='score'>
+        <input type='submit' value='Insert'>
+    </form>
+  </body>
+</html>

@@ -52,8 +52,25 @@ def editUser(user_id):
     else:
         return render_template('editUser.html',user = user)
 
+@app.route('/scores/insert/', methods=['GET','POST'])
+def insertUser():
+    if request.method == 'POST':
+        key = request.form['email']
+        userList = session.query(User).filter_by(email = key).all()
+        if userList != [] :
+            user = userList[0]
+            user.name = request.form['name']
+            user.score = request.form['score']
+        else :
+            user = User(name=request.form['name'], email=request.form['email'], score=int(request.form['score']))
+        session.add(user)
+        session.commit()
+        return redirect(url_for('userJSON'))
+    else :
+        return render_template('insertUser.html')
+
 @app.route('/scores/JSON')
-def restaurantMenuJSON():
+def userJSON():
     users = session.query(User).all()
     return jsonify(User=[user.serialize for user in users])
 
