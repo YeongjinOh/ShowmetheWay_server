@@ -65,7 +65,8 @@ def insertUser():
             user = User(name=request.form['name'], email=request.form['email'], score=int(request.form['score']))
         session.add(user)
         session.commit()
-        return redirect(url_for('userJSON'))
+        users = session.query(User).all()
+        return jsonify(User=[user.serialize for user in users])
     else :
         return render_template('insertUser.html')
 
