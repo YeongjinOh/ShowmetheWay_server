@@ -48,7 +48,7 @@ def editUser(user_id):
             user.score = request.form['score']
         session.add(user)
         session.commit()
-        return redirect(url_for('showAll'))
+        return redirect(url_for('userJSON'))
     else:
         return render_template('editUser.html',user = user)
 
